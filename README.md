@@ -26,6 +26,13 @@ public interface DummyInterface<T> {
 }
 ```
 
+#### Instantiate Functional Interface
+##### Traditional Inner Class:
+
+
+##### With Lambda Expression (recommended)
+
+
 
 
 ### Method Reference:
