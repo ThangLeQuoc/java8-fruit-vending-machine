@@ -18,52 +18,48 @@ import com.github.thanglequoc.java8.lambdaExpression.functionalInterface.FruitCo
 import com.github.thanglequoc.java8.lambdaExpression.functionalInterface.FruitFilter;
 
 public class FruitComparatorTestRunner {
-	
-	
-	
-	/*
-	 * Create functional interface implementation with anonymous static inner type
-	 * */
-	@Test
-	public void createFruitComparatorWithInnerClass() {
-		FruitComparator weightComparator = new FruitComparator() {
-			@Override
-			public int compare(Fruit a, Fruit b) {
-				return a.getWeight() - b.getWeight();
-			}
-		};
+
+    /*
+     * Create functional interface implementation with anonymous static inner type
+     */
+    @Test
+    public void createFruitComparatorWithInnerClass() {
+	FruitComparator weightComparator = new FruitComparator() {
+	    @Override
+	    public int compare(Fruit a, Fruit b) {
+		return a.getWeight() - b.getWeight();
+	    }
+	};
+    }
+
+    /*
+     * Create function interface with lambda expression
+     */
+    @Test
+    public void createFruitComparatorWithLambdaExpression() {
+	FruitComparator weightComparator = (a, b) -> a.getWeight() - b.getWeight();
+    }
+
+    @Test
+    public void fruitFilterTestRun() {
+	Fruit apple = new Apple();
+	apple.setRipe(false);
+	apple.setColor(Color.RED);
+
+	Fruit durian = new Durian();
+	durian.setRipe(true);
+	durian.setColor(Color.YELLOW);
+
+	List<Fruit> fruitShelf = new ArrayList<>(Arrays.asList(apple, durian));
+
+	List<Fruit> basket = new ArrayList<>();
+
+	for (Fruit fruit : fruitShelf) {
+	    if (FruitFilter.IS_RIPE().match(fruit)) {
+		basket.add(fruit);
+	    }
 	}
-	
-	
-	/*
-	 * Create function interface with lambda expression
-	 * */
-	@Test
-	public void createFruitComparatorWithLambdaExpression() {
-		FruitComparator weightComparator = (a,b) -> a.getWeight() - b.getWeight();
-	}
-	
-	@Test
-	public void fruitFilterTestRun() {
-		Fruit apple = new Apple();
-		apple.setRipe(false);
-		apple.setColor(Color.RED);
-		
-		
-		Fruit durian = new Durian();
-		durian.setRipe(true);
-		durian.setColor(Color.YELLOW);
-		
-		List<Fruit> fruitShelf = new ArrayList<>(Arrays.asList(apple, durian));
-		
-		List<Fruit> basket = new ArrayList<>();
-		
-		for (Fruit fruit : fruitShelf) {
-			if (FruitFilter.IS_RIPE().match(fruit)) {
-				basket.add(fruit);
-			}
-		}
-		
-		assertTrue(CollectionUtils.isNotEmpty(basket));
-	}
+
+	assertTrue(CollectionUtils.isNotEmpty(basket));
+    }
 }

@@ -1,10 +1,9 @@
 package com.github.thanglequoc.java8.common.model;
 
-public class Durian extends Fruit {
+public class Banana extends Fruit {
+    private static final String NAME = "Banana";
 
-    private static final String NAME = "Durian";
-
-    public Durian() {
+    public Banana() {
         super(NAME);
         this.setColor(Color.YELLOW);
     }
