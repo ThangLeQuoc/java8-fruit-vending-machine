@@ -1,4 +1,6 @@
-package com.github.thanglequoc.java8.common.model;
+package com.github.thanglequoc.FruitVendingMachine.fruits;
+
+import com.github.thanglequoc.FruitVendingMachine.fruits.common.Color;
 
 public class Papaya extends Fruit {
 

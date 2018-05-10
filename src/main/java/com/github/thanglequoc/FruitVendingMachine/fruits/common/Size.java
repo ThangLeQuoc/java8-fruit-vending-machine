@@ -1,4 +1,4 @@
-package com.github.thanglequoc.java8.common.model;
+package com.github.thanglequoc.FruitVendingMachine.fruits.common;
 
 public enum Size {
     SMALL, MEDIUM, LARGE

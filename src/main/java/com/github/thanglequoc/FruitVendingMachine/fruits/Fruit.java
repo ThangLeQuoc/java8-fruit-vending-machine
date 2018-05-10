@@ -1,4 +1,7 @@
-package com.github.thanglequoc.java8.common.model;
+package com.github.thanglequoc.FruitVendingMachine.fruits;
+
+import com.github.thanglequoc.FruitVendingMachine.fruits.common.Color;
+import com.github.thanglequoc.FruitVendingMachine.fruits.common.Size;
 
 public abstract class Fruit {
     private String name;
