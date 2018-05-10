@@ -4,7 +4,7 @@
 
 ### Syntax:
 
-### Where and how to use Lambda:
+### Where and how to use Lambda
 
 ### Functional Interface:
 > A functional interface is an interface that contains one any only one abstract method.
@@ -26,16 +26,46 @@ public interface DummyInterface<T> {
 }
 ```
 
+Let's create a `FruitComparator` functional interface, with one abstract method to compare two fruit:
+
+`FruitComparator`
+```
+@FunctionalInterface
+public interface FruitComparator {
+    public int compare(Fruit a, Fruit b);
+}
+```
+
 #### Instantiate Functional Interface
-##### Traditional Inner Class:
+##### Traditional Inner Class
+```
+/*
+* Create functional interface implementation with anonymous static inner type
+* */
+@Test
+public void createFruitComparatorWithInnerClass() {
+    FruitComparator weightComparator = new FruitComparator() {
+        @Override
+        public int compare(Fruit a, Fruit b) {
+            return a.getWeight() - b.getWeight();
+        }
+    };
+}
+```
 
 
-##### With Lambda Expression (recommended)
 
+##### With Lambda Expression
+```
+/*
+* Create function interface with lambda expression
+* */
+@Test
+public void createFruitComparatorWithLambdaExpression() {
+    FruitComparator weightComparator = (a,b) -> a.getWeight() - b.getWeight();
+}
+```
 
-
-
-### Method Reference:
 
 >Reference Sources
 https://www.codeproject.com/Articles/780806/Lambda-Expressions-in-Java
