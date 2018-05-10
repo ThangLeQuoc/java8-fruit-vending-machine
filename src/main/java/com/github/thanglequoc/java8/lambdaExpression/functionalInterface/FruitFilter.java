@@ -1,7 +1,7 @@
 package com.github.thanglequoc.java8.lambdaExpression.functionalInterface;
 
-import java.awt.Color;
 
+import com.github.thanglequoc.java8.common.model.Color;
 import com.github.thanglequoc.java8.common.model.Fruit;
 import com.github.thanglequoc.java8.common.model.Size;
 

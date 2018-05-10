@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.github.thanglequoc.java8.common.model.Apple;
 import com.github.thanglequoc.java8.common.model.Banana;
+import com.github.thanglequoc.java8.common.model.Color;
 import com.github.thanglequoc.java8.common.model.Durian;
 import com.github.thanglequoc.java8.common.model.Fruit;
 import com.github.thanglequoc.java8.common.model.Orange;
@@ -34,19 +35,19 @@ public class FruitVendingMachineTestRun {
 
     @Test
     public void testLoadFruits() {
-        fruitVendingMachine.setFruits(loadFruits());
+        fruitVendingMachine.setFruits(shipSomeFruits());
         assertEquals(7, fruitVendingMachine.getFruits().size());
     }
 
     @Test
     public void testFilter_ShouldFilterFruitWithSmallSize() {
-        //given
-        fruitVendingMachine.setFruits(loadFruits());
-        
-        //when
+        // given
+        fruitVendingMachine.setFruits(shipSomeFruits());
+
+        // when
         List<Fruit> actualFruits = fruitVendingMachine.filterFruit(FruitFilter.WITH_SIZE(Size.SMALL));
-        
-        //then
+
+        // then
         assertEquals(2, actualFruits.size());
         List<String> expectedFruitNames = Arrays.asList("Banana", "Rambutan");
         List<String> actualFruitNames = actualFruits.stream().map(fruit -> fruit.getName())
@@ -54,10 +55,29 @@ public class FruitVendingMachineTestRun {
         assertTrue(actualFruitNames.containsAll(expectedFruitNames));
     }
 
-    /**
-     * @return
-     */
-    private List<Fruit> loadFruits() {
+    @Test
+    public void testFilter_ShouldFilterRipeFruit() {
+        // given
+        fruitVendingMachine.setFruits(shipSomeFruits());
+
+        // when
+        List<Fruit> ripeFruit = fruitVendingMachine.filterFruit(FruitFilter.IS_RIPE());
+        
+        List<String> expectedRipeFruitNames = Arrays.asList("Apple", "Banana", "Papaya");
+        List<String> actualRipeFruitNames = ripeFruit.stream().map(Fruit::getName).collect(Collectors.toList());
+        assertTrue(actualRipeFruitNames.containsAll(expectedRipeFruitNames));
+    }
+
+    @Test
+    public void testFilter_ShouldFilterYellowColorFruit() {
+        // given
+        fruitVendingMachine.setFruits(shipSomeFruits());
+
+        // when
+        List<Fruit> yellowColorFruit = fruitVendingMachine.filterFruit(FruitFilter.WITH_COLOR(Color.YELLOW));
+    }
+
+    private List<Fruit> shipSomeFruits() {
         List<Fruit> fruits = new ArrayList<>();
 
         Fruit apple = new Apple();

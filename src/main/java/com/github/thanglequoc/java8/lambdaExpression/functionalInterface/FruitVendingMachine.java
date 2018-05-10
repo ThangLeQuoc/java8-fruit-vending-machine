@@ -23,15 +23,6 @@ public class FruitVendingMachine {
         return fruits.stream().filter(fruit -> filter.match(fruit)).collect(Collectors.toList());
     }
 
-    public void showFruits() {
-        System.out.println("Quantity: " + fruits.size());
-        if (CollectionUtils.isNotEmpty(fruits)) {
-            fruits.stream().forEach(fruit -> {
-                System.out.println("Name: " + fruit.getName());
-            });
-        }
-    }
-
     public void addFruit(Fruit fruit) {
         fruits.add(fruit);
     }
