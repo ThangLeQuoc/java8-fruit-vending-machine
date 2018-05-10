@@ -11,18 +11,18 @@ import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.thanglequoc.java8.common.model.Apple;
-import com.github.thanglequoc.java8.common.model.Banana;
-import com.github.thanglequoc.java8.common.model.Color;
-import com.github.thanglequoc.java8.common.model.Durian;
-import com.github.thanglequoc.java8.common.model.Fruit;
-import com.github.thanglequoc.java8.common.model.Orange;
-import com.github.thanglequoc.java8.common.model.Papaya;
-import com.github.thanglequoc.java8.common.model.Rambutan;
-import com.github.thanglequoc.java8.common.model.Sapodillia;
-import com.github.thanglequoc.java8.common.model.Size;
-import com.github.thanglequoc.java8.lambdaExpression.functionalInterface.FruitFilter;
-import com.github.thanglequoc.java8.lambdaExpression.functionalInterface.FruitVendingMachine;
+import com.github.thanglequoc.FruitVendingMachine.FruitVendingMachine;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Apple;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Banana;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Durian;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Fruit;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Orange;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Papaya;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Rambutan;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Sapodillia;
+import com.github.thanglequoc.FruitVendingMachine.fruits.common.Color;
+import com.github.thanglequoc.FruitVendingMachine.fruits.common.Size;
+import com.github.thanglequoc.FruitVendingMachine.functions.FruitFilter;
 
 public class FruitVendingMachineTestRun {
 

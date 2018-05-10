@@ -1,4 +1,4 @@
-package com.github.thanglequoc.java8.lambdaExpression.functionalInterface;
+package com.github.thanglequoc.FruitVendingMachine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import com.github.thanglequoc.java8.common.model.Fruit;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Fruit;
+import com.github.thanglequoc.FruitVendingMachine.functions.FruitFilter;
 
 public class FruitVendingMachine {
 

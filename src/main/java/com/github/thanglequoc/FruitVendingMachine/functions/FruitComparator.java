@@ -1,8 +1,8 @@
-package com.github.thanglequoc.java8.lambdaExpression.functionalInterface;
+package com.github.thanglequoc.FruitVendingMachine.functions;
 
 import java.util.Comparator;
 
-import com.github.thanglequoc.java8.common.model.Fruit;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Fruit;
 
 @FunctionalInterface
 public interface FruitComparator extends Comparator<Fruit> {

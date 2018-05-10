@@ -1,9 +1,9 @@
-package com.github.thanglequoc.java8.lambdaExpression.functionalInterface;
+package com.github.thanglequoc.FruitVendingMachine.functions;
 
 
-import com.github.thanglequoc.java8.common.model.Color;
-import com.github.thanglequoc.java8.common.model.Fruit;
-import com.github.thanglequoc.java8.common.model.Size;
+import com.github.thanglequoc.FruitVendingMachine.fruits.Fruit;
+import com.github.thanglequoc.FruitVendingMachine.fruits.common.Color;
+import com.github.thanglequoc.FruitVendingMachine.fruits.common.Size;
 
 @FunctionalInterface
 public interface FruitFilter {
