@@ -23,14 +23,14 @@ Two types of implements:
 
 `(parameters) -> {statements;}`
 
-| Use case                   | Examples of Lambda           |
-| ---------------------------|:-------------:|
-| A boolean expression       | right-aligned |
-| Creating objects           | centered      |
-| Consuming objects          | are neat      |
-| Select/Extract from object | are neat      |
-| Compare two values         | are neat      |
-| Compare two objects        | are neat      |
+| Use case                   | Examples of Lambda                                       |
+| ---------------------------|:--------------------------------------------------------:|
+| A boolean expression       | (List<String> list) -> list.isEmpty()                    |
+| Creating objects           | () -> new Apple()                                        |
+| Consuming objects          | (Fruit a) -> { System.out.print(a); }                    |
+| Select/Extract from object | (Fruit a) -> a.getName()                                 |
+| Compare two values         | (int x, int y) -> x>y                                    |
+| Compare two objects        | (Fruit a, Fruit b) -> a.getWeight() > b.getWeight()      |
 
 ### Functional Interface:
 > A functional interface is an interface that contains one any only one abstract method.
@@ -151,6 +151,7 @@ public interface FruitFilter {
 To keep thing clean, `FruitFilter` make use of **Java 8 Interface static method** to create some commonly used filter.
 
 We have fruits, and filter instructions, it's time to build a fruit vending machine and hook everything up.
+
 `FruitVendingMachine.java`
 ```
 public class FruitVendingMachine {
@@ -185,6 +186,8 @@ public class FruitVendingMachine {
 ```
 
 It's time for a test run:
+
+`FruitVendingMachineTest.java`
 ```
     @Test
     public void testFilter_ShouldFilterFruitWithSmallSize() {
@@ -210,11 +213,96 @@ It's time for a test run:
         assertTrue(actualRipeFruitNames.containsAll(expectedRipeFruitNames));
     }
 ```
-### Usage Best Practice
-http://www.baeldung.com/java-8-lambda-expressions-tips
+### Lambda Usage Best Practice
+* Prefer standard functional interface
+>Functional interfaces, which are gathered in the java.util.function package, satisfy most developers’ needs in providing target types for lambda expressions and method references. Each of these interfaces is general and abstract, making them easy to adapt to almost any lambda expression.
 
+For example, `FruitFilter` functional interface can be removed. We can just use `java.util.function.Predicate` instead
+
+```
+@Test
+public void createLambdaWithPredicate() {
+    Predicate<Fruit> isNutrious = fruit -> fruit.getNutritionalScore() > 50;
+    boolean check = isNutrious.test(apple);
+}
+```
+
+* Use `@FunctionalInterface` annotation 
+
+The compiler will check if there is any strange thing that break the predefined structure of a functional interface.
+
+So use this
+
+```
+@FunctionalInterface
+public interface FruitFilter {
+    public boolean match(Fruit fruit);
+}
+```
+insteads of just
+```
+public interface FruitFilter {
+    public boolean match(Fruit fruit);
+```
+* Instantiate functional interface with Lambda Expression:
+Use Lambda Expression to instatiate interface will help reduce the amount of boilerplate code. Make the code easier to read and review
+
+`FruitFilter myFilter = fruit -> fruit.getWeight() > 40;`
+
+* Keep Lambda Expression short and self-explantory
+>If possible, use one line constructions instead of a large block of code. Remember **lambdas should be an expression**, **not a narrative**. Despite its concise syntax, lambdas should precisely express the functionality they provide.
+
+* Avoid blocks of code in Lambda's body
+
+In an ideal situation, lambdas should be written in one line of code. With this approach, the lambda is a self-explanatory construction, which declares what action should be executed with what data.  
+> If you have a large block of code, the lambda's functionality is not immediately clear.
+
+Do
+```
+public void testInstatiateFruitFilter_CleanWay() {
+    char character = 'A';
+    FruitFilter myFilter = fruit -> startWithChar(character, fruit.getName());
+}
+
+private boolean startWithChar(char character, String str) {
+    /* Perform a mysterious nice long regex validation */
+    /* Do a meaty validation check, is the char a number ? */
+    return true;
+}
+```
+Insteads of
+```
+@Test
+public void testInstatiateFruitFilter_DirtyWay() {
+    char character = 'A';
+    FruitFilter startWithCharFilter = fruit -> {
+        /* Do a meaty validation check, is the char a number ? */
+        /* Perform a mysterious nice long regex validation */
+        return false;
+    };
+}
+```
+
+* Avoid specifying parameter types
+
+The compiler is able to resolve the type of lambda parameters with the help of [Type Reference](https://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html). Adding a type to parameter is optional and can be omitted.
+
+Do `fruit -> fruit.getWeight() > 30` and avoid ` Fruit fruit -> fruit.getWeight() > 30`
+
+* Avoid parentheses around single parameter
+Parentheses only required when function accept **more than one parameters** or **no parameter at all**, so parentheses can be removed for case with only one parameter
+
+Do `fruit -> fruit.isRipe()` insteads of `(fruit) -> fruit.isRipe()`
+
+* Avoid `return` statement and braces `{}`
+
+_Braces_ and _return_ statement are optional in one-line lambda bodies. Better remove this for clarity and conciseness.
+
+Do `fruit -> fruit.isRipe()` insteads of `fruit -> { return fruit.isRipe(); }`
 
 >Reference Sources
+
+http://www.baeldung.com/java-8-lambda-expressions-tips
 https://www.codeproject.com/Articles/780806/Lambda-Expressions-in-Java
 http://tutorials.jenkov.com/java/lambda-expressions.html
 https://medium.freecodecamp.org/learn-these-4-things-and-working-with-lambda-expressions-b0ab36e0fffc
