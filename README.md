@@ -46,9 +46,9 @@ Functional interface treat a function like an object, which allow us to pass the
 This  declaration will raise error since there are more than one abstract methods declared:
 ```
 @FunctionalInterface
-public interface DummyInterface<T> {
-    public boolean isGreater(T a, T b);
-    public void doSomeWork();
+public interface FruitFilter {
+    public boolean match(Fruit fruit);
+    public void washFruit(Fruit fruit);
 }
 ```
 
@@ -65,7 +65,6 @@ public interface FruitFilter {
 #### Instantiate Functional Interface
 ##### Traditional Inner Class
 
-http://www.baeldung.com/java-8-functional-interfaces
 ```
 
 /*
@@ -300,10 +299,11 @@ _Braces_ and _return_ statement are optional in one-line lambda bodies. Better r
 
 Do `fruit -> fruit.isRipe()` insteads of `fruit -> { return fruit.isRipe(); }`
 
->Reference Sources
+>Reference Sources  
 
-http://www.baeldung.com/java-8-lambda-expressions-tips
-https://www.codeproject.com/Articles/780806/Lambda-Expressions-in-Java
-http://tutorials.jenkov.com/java/lambda-expressions.html
-https://medium.freecodecamp.org/learn-these-4-things-and-working-with-lambda-expressions-b0ab36e0fffc
-http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html
+http://www.baeldung.com/java-8-lambda-expressions-tips  
+https://www.codeproject.com/Articles/780806/Lambda-Expressions-in-Java  
+http://tutorials.jenkov.com/java/lambda-expressions.html  
+https://medium.freecodecamp.org/learn-these-4-things-and-working-with-lambda-expressions-b0ab36e0fffc  
+http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html  
+http://www.baeldung.com/java-8-functional-interfaces
