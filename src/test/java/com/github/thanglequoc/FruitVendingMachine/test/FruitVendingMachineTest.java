@@ -24,7 +24,7 @@ import com.github.thanglequoc.FruitVendingMachine.fruits.common.Color;
 import com.github.thanglequoc.FruitVendingMachine.fruits.common.Size;
 import com.github.thanglequoc.FruitVendingMachine.functions.FruitFilter;
 
-public class FruitVendingMachineTestRun {
+public class FruitVendingMachineTest {
 
     private FruitVendingMachine fruitVendingMachine;
 
