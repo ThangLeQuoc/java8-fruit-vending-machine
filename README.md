@@ -32,7 +32,7 @@ Two types of implements:
 | Compare two values         | (int x, int y) -> x>y                                    |
 | Compare two objects        | (Fruit a, Fruit b) -> a.getWeight() > b.getWeight()      |
 
-### Functional Interface:
+### :large_blue_diamond: Functional Interface:
 > A functional interface is an interface that contains one any only one abstract method.
 
 Functional interface treat a function like an object, which allow us to pass the verbs (functions) around the program rather than nouns (objects).
@@ -212,7 +212,7 @@ It's time for a test run:
         assertTrue(actualRipeFruitNames.containsAll(expectedRipeFruitNames));
     }
 ```
-### Lambda Usage Best Practice
+### :rocket: Lambda Usage Best Practice
 * Prefer standard functional interface
 >Functional interfaces, which are gathered in the java.util.function package, satisfy most developers’ needs in providing target types for lambda expressions and method references. Each of these interfaces is general and abstract, making them easy to adapt to almost any lambda expression.
 
