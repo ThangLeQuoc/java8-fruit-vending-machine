@@ -91,7 +91,7 @@ public void testInstatiateFruitFilter_WithLambdaExpression() {
 }
 ```
 
-### The Fruit Vending Machine Application
+### The Fruit Vending Machine Application :convenience_store: :apple: :watermelon: :banana:
 We'll create a simple Fruit Vending Machine. A fruit vending machine store a list of _fruits_ and have
 method to _filter_ specific kind of fruits that customer needs.
 
