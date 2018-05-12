@@ -22,7 +22,10 @@ public class FruitFilterTest {
             }
         };
     }
-
+    
+    /*
+    * Create function interface with lambda expression
+    * */
     @Test
     public void testInstatiateFruitFilter_WithLambdaExpression() {
         FruitFilter myFilter = fruit -> fruit.getWeight() > 40;
