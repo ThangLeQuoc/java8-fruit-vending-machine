@@ -120,6 +120,54 @@ public class Apple extends Fruit {
     }
 }
 ```
+
+We got some fruits ready, let's build the fruit vending machine. The fruit vending machine day one is simple, it stores a list of fruit, a couple of useful methods
+to fill in, get all the fruit, and most important, the _filter_ method to filter out the specific kind of fruits that customer wanted.
+
+```
+public class FruitVendingMachine {
+
+    List<Fruit> fruits;
+
+    public FruitVendingMachine() {
+        fruits = new ArrayList<>();
+    }
+    
+    public List<Fruit> filterFruit(FilterStrategy filterStrategy) {
+        if (CollectionUtils.isEmpty(fruits)) {
+            return new ArrayList<>();
+        }
+        
+        if (FilterStrategy.IS_RIPE.equals(filterStrategy)) {
+            return fruits.stream().filter(fruit -> fruit.isRipe()).collect(Collectors.toList());
+        }
+        if (FilterStrategy.WITH_RED_COLOR.equals(filterStrategy)) {
+            return fruits.stream().filter(fruit -> Color.RED.equals(fruit.getColor())).collect(Collectors.toList());
+        }
+        return fruits;
+    }
+
+    public void addFruit(Fruit fruit) {
+        fruits.add(fruit);
+    }
+
+    public void setFruits(List<Fruit> fruits) {
+        this.fruits = fruits;
+    }
+
+    public List<Fruit> getFruits() {
+        return fruits;
+    }
+}
+```
+
+The fruit vending machine run well enough, but sometimes later, the client **require more filter strategy**, and **each time a new filter strategy is added, the vending machine have to provide implementation for that strategy**, and the vending machine must be rebuilt again, which made the machine becomes hard to extends. We cannot provide a custom filter strategy at runtime.
+This kind of design violate the **Open/Closed** principle in SOLID software design. 
+
+> The vending machine only do one simple thing. It filters fruit. 
+
+It's time to change the filter strategy, this time we'll provide the filter instruction to the machine. The vending machine now only do one simple thing, **it filters fruit base on the instruction the client provided**. We'll abstract the filter as an interface, and provide implementation for it.
+
 We need a `FruitFilter` act as a functional interface. Each `FruitFilter` implement will provide
 filter instruction for the fruit vending machine.
 
@@ -212,6 +260,29 @@ It's time for a test run:
         assertTrue(actualRipeFruitNames.containsAll(expectedRipeFruitNames));
     }
 ```
+
+> We inject the fruit filter implementation into the vending machine, the fruit vending machine doesn't care what the filter do. It's doesn't have
+to worry if a new filter is added. All the thing we need to do, is to provide the _filter instruction_ for the machine.
+With more filters coming, the application is very easy to extends.
+```
+@Test
+public void testFilter_ShouldRunWithVariousNewFilters() {
+    // given
+    fruitVendingMachine.setFruits(shipSomeFruits());
+    
+    /* The client want fruit that meet the standard ISO-9001 for fruit. In more detail, a  fruit meet this standard
+    * must ripe and has a minimal nutritional score of 100 */
+    
+    FruitFilter meetISO9001 = fruit -> fruit.isRipe() && fruit.getNutritionalScore() > 100;
+    List<Fruit> iso9001fruits = fruitVendingMachine.filterFruit(meetISO9001);
+}
+```
+
+ We've just apply the **Strategy Design Pattern** by encapsulate and provide the _filter_ behaviors to the machine, thus applied various OOP design rules within our implementation
+
+ - Open/Closed Principle: No modification on VendingMachine class is required if we add more filters. The application is extensible
+ - Dependency Injection: The VendingMachine depend on the abstraction _FruitFilter_ injected in.
+
 ### :rocket: Lambda Usage Best Practice
 * Prefer standard functional interface
 >Functional interfaces, which are gathered in the java.util.function package, satisfy most developers’ needs in providing target types for lambda expressions and method references. Each of these interfaces is general and abstract, making them easy to adapt to almost any lambda expression.
