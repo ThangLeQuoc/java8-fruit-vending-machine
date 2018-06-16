@@ -41,13 +41,10 @@ public class FruitVendingMachineTest {
 
     @Test
     public void testFilter_ShouldFilterFruitWithSmallSize() {
-        // given
         fruitVendingMachine.setFruits(shipSomeFruits());
 
-        // when
         List<Fruit> actualFruits = fruitVendingMachine.filterFruit(FruitFilter.WITH_SIZE(Size.SMALL));
 
-        // then
         assertEquals(2, actualFruits.size());
         List<String> expectedFruitNames = Arrays.asList("Banana", "Rambutan");
         List<String> actualFruitNames = actualFruits.stream().map(fruit -> fruit.getName())
@@ -57,10 +54,8 @@ public class FruitVendingMachineTest {
 
     @Test
     public void testFilter_ShouldFilterRipeFruit() {
-        // given
         fruitVendingMachine.setFruits(shipSomeFruits());
 
-        // when
         List<Fruit> ripeFruit = fruitVendingMachine.filterFruit(FruitFilter.IS_RIPE());
         
         List<String> expectedRipeFruitNames = Arrays.asList("Apple", "Banana", "Papaya");

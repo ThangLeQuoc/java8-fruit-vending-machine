@@ -297,7 +297,7 @@ public void createLambdaWithPredicate() {
 }
 ```
 
-* Use `@FunctionalInterface` annotation 
+* Use `@FunctionalInterface` annotation
 
 The compiler will check if there is any strange thing that break the predefined structure of a functional interface.
 
@@ -324,7 +324,7 @@ Use Lambda Expression to instatiate interface will help reduce the amount of boi
 
 * Avoid blocks of code in Lambda's body
 
-In an ideal situation, lambdas should be written in one line of code. With this approach, the lambda is a self-explanatory construction, which declares what action should be executed with what data.  
+In an ideal situation, lambdas should be written in one line of code. With this approach, the lambda is a self-explanatory construction, which declares what action should be executed with what data.
 > If you have a large block of code, the lambda's functionality is not immediately clear.
 
 Do
@@ -378,3 +378,4 @@ http://tutorials.jenkov.com/java/lambda-expressions.html
 https://medium.freecodecamp.org/learn-these-4-things-and-working-with-lambda-expressions-b0ab36e0fffc  
 http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html  
 http://www.baeldung.com/java-8-functional-interfaces
+
