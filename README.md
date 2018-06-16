@@ -380,4 +380,45 @@ http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart
 http://www.baeldung.com/java-8-functional-interfaces
 
 # Optional
+The machine physical menu appearance looks like this:
+<pre>
+[Apple]-[Orrange]-[Banana]-[Rambutan]  | Select Fruit Index [__]
+  [1]      [2]       [3]       [4]     |      [Gimme Fruit]
+</pre>
 
+Basically, user will choose an index represent the fruit he wants to buy, and hit the shiny
+[Gimme Fruit] button.
+
+```
+ public Fruit getFruit(int i) {
+        if (i >= MAX_MACHINE_SLOTS) throw new IllegalArgumentException("Illegal Fruit Slot");
+        if (balance )
+        return fruits[i];
+    }
+```
+> What if the fruit user selected is out of stock ?
+> What if the current balance is not enough to make a purchase ?
+
+Well just use `Null` to indicate a missing object.
+
+```
+ public Fruit getFruit(int i) {
+    if (i >= MAX_MACHINE_SLOTS)
+        throw new IllegalArgumentException("Illegal Fruit Slot");
+    Fruit selectedFruit = fruits[i];
+    if (balance < selectedFruit.getPrice() || selectedFruit == null) {
+        return null;
+    }
+
+    fruits[i] = null;
+    balance -= selectedFruit.getPrice();
+    return selectedFruit;
+}
+```
+Problem: How can the machine indicate that a slot for that fruit is out of stock ? Set it to `Null`
+
+
+
+>A common (bad) practice is to return the null reference to indicate the absence of an object
+
+>"I call it my billion-dollar mistake. It was the invention of the null reference in 1965. I couldn't resist the temptation to put in a null reference, simply because it was so easy to implement." - Tony Hoare

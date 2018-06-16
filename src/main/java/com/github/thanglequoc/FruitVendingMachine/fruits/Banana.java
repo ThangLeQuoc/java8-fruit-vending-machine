@@ -8,6 +8,7 @@ public class Banana extends Fruit {
     public Banana() {
         super(NAME);
         this.setColor(Color.YELLOW);
+        setPrice(5000);
     }
 
 }

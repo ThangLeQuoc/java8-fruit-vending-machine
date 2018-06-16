@@ -9,6 +9,7 @@ public class Durian extends Fruit {
     public Durian() {
         super(NAME);
         this.setColor(Color.YELLOW);
+        setPrice(40000);
     }
 
 }

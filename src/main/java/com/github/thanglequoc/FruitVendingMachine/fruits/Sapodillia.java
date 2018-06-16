@@ -8,6 +8,7 @@ public class Sapodillia extends Fruit {
     public Sapodillia() {
         super(NAME);
         this.setColor(Color.YELLOW);
+        setPrice(5000);
     }
 
 }

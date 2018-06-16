@@ -10,6 +10,7 @@ public abstract class Fruit {
     private int nutritionalScore;
     private boolean ripe;
     private Size size;
+    private long price;
 
     public Fruit(String name) {
         this.name = name;
@@ -63,4 +64,12 @@ public abstract class Fruit {
     public Size getSize() {
         return size;
     }
+    
+    public long getPrice() {
+        return price;
+    }
+    
+    protected void setPrice(long price) {
+        this.price = price;
+    } 
 }

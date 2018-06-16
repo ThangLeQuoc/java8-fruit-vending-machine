@@ -8,6 +8,7 @@ public class Rambutan extends Fruit {
     public Rambutan() {
         super(NAME);
         this.setColor(Color.RED);
+        setPrice(15000);
     }
 
 }
