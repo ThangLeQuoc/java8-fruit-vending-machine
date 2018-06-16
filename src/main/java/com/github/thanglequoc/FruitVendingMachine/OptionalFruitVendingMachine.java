@@ -1,5 +1,9 @@
 package com.github.thanglequoc.FruitVendingMachine;
 
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.function.Consumer;
+
 import com.github.thanglequoc.FruitVendingMachine.fruits.Fruit;
 
 public class OptionalFruitVendingMachine {
@@ -8,38 +12,43 @@ public class OptionalFruitVendingMachine {
 
     private long balance;
 
-    private Fruit[] fruits;
+    private Optional<Fruit>[] fruits;
 
     public OptionalFruitVendingMachine() {
-        fruits = new Fruit[MAX_MACHINE_SLOTS];
+        fruits = new Optional[MAX_MACHINE_SLOTS];
+        for (int i = 0; i < fruits.length; i++) {
+            fruits[i] = Optional.empty();
+        }
         balance = 0;
     }
 
     public void setFruit(int i, Fruit fruit) {
         if (i >= MAX_MACHINE_SLOTS)
             throw new IllegalArgumentException("Illegal Fruit Slot");
-        fruits[i] = fruit;
+        fruits[i] = Optional.of(fruit);
     }
 
-    public Fruit getFruit(int i) {
+    public Fruit buyFruit(int i) {
         if (i >= MAX_MACHINE_SLOTS)
             throw new IllegalArgumentException("Illegal Fruit Slot");
-        Fruit selectedFruit = fruits[i];
-        if (balance < selectedFruit.getPrice() || selectedFruit == null) {
-            return null;
+        
+        Optional<Fruit> selectedFruit = fruits[i];
+        Fruit fruit = selectedFruit.orElseThrow(FruitOutOfStockException::new);
+        if (balance < fruit.getPrice()) {
+            throw new NotEnoughBalanceException();
         }
-
-        fruits[i] = null;
-        balance -= selectedFruit.getPrice();
-        return selectedFruit;
+        balance -= fruit.getPrice();
+        fruits[i] = Optional.empty();
+        return fruit;
     }
-
-    public Fruit[] getFruits() {
-        return fruits;
-    }
+    
 
     public void addBalance(long balance) {
         this.balance += balance;
+    }
+    
+    public long getCurrentBalance() {
+        return this.balance;
     }
 
 }
