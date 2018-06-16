@@ -132,12 +132,12 @@ public class FruitVendingMachine {
     public FruitVendingMachine() {
         fruits = new ArrayList<>();
     }
-    
+
     public List<Fruit> filterFruit(FilterStrategy filterStrategy) {
         if (CollectionUtils.isEmpty(fruits)) {
             return new ArrayList<>();
         }
-        
+
         if (FilterStrategy.IS_RIPE.equals(filterStrategy)) {
             return fruits.stream().filter(fruit -> fruit.isRipe()).collect(Collectors.toList());
         }
@@ -162,9 +162,9 @@ public class FruitVendingMachine {
 ```
 
 The fruit vending machine run well enough, but sometimes later, the client **require more filter strategy**, and **each time a new filter strategy is added, the vending machine have to provide implementation for that strategy**, and the vending machine must be rebuilt again, which made the machine becomes hard to extends. We cannot provide a custom filter strategy at runtime.
-This kind of design violate the **Open/Closed** principle in SOLID software design. 
+This kind of design violate the **Open/Closed** principle in SOLID software design.
 
-> The vending machine only do one simple thing. It filters fruit. 
+> The vending machine only do one simple thing. It filters fruit.
 
 It's time to change the filter strategy, this time we'll provide the filter instruction to the machine. The vending machine now only do one simple thing, **it filters fruit base on the instruction the client provided**. We'll abstract the filter as an interface, and provide implementation for it.
 
@@ -269,10 +269,10 @@ With more filters coming, the application is very easy to extends.
 public void testFilter_ShouldRunWithVariousNewFilters() {
     // given
     fruitVendingMachine.setFruits(shipSomeFruits());
-    
+
     /* The client want fruit that meet the standard ISO-9001 for fruit. In more detail, a  fruit meet this standard
     * must ripe and has a minimal nutritional score of 100 */
-    
+
     FruitFilter meetISO9001 = fruit -> fruit.isRipe() && fruit.getNutritionalScore() > 100;
     List<Fruit> iso9001fruits = fruitVendingMachine.filterFruit(meetISO9001);
 }
@@ -370,12 +370,14 @@ _Braces_ and _return_ statement are optional in one-line lambda bodies. Better r
 
 Do `fruit -> fruit.isRipe()` insteads of `fruit -> { return fruit.isRipe(); }`
 
->Reference Sources  
+>Reference Sources
 
-http://www.baeldung.com/java-8-lambda-expressions-tips  
-https://www.codeproject.com/Articles/780806/Lambda-Expressions-in-Java  
-http://tutorials.jenkov.com/java/lambda-expressions.html  
-https://medium.freecodecamp.org/learn-these-4-things-and-working-with-lambda-expressions-b0ab36e0fffc  
-http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html  
+http://www.baeldung.com/java-8-lambda-expressions-tips
+https://www.codeproject.com/Articles/780806/Lambda-Expressions-in-Java
+http://tutorials.jenkov.com/java/lambda-expressions.html
+https://medium.freecodecamp.org/learn-these-4-things-and-working-with-lambda-expressions-b0ab36e0fffc
+http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/Lambda-QuickStart/index.html
 http://www.baeldung.com/java-8-functional-interfaces
+
+# Optional
 
