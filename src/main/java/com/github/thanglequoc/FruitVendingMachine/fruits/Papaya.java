@@ -9,6 +9,7 @@ public class Papaya extends Fruit {
     public Papaya() {
         super(NAME);
         this.setColor(Color.YELLOW);
+        setPrice(8000);
     }
 
 }

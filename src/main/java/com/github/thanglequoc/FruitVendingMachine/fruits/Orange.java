@@ -8,6 +8,7 @@ public class Orange extends Fruit {
     public Orange() {
         super(NAME);
         this.setColor(Color.ORANGE);
+        setPrice(7000);
     }
 
 }

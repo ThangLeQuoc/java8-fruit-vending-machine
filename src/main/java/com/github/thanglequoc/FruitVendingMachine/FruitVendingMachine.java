@@ -6,12 +6,15 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 
+import com.github.thanglequoc.FoodVendingMachine.money.Banknote;
 import com.github.thanglequoc.FruitVendingMachine.fruits.Fruit;
 import com.github.thanglequoc.FruitVendingMachine.functions.FruitFilter;
 
 public class FruitVendingMachine {
 
-    List<Fruit> fruits;
+    private List<Fruit> fruits;
+    
+    private long balance;
 
     public FruitVendingMachine() {
         fruits = new ArrayList<>();
@@ -34,5 +37,9 @@ public class FruitVendingMachine {
 
     public List<Fruit> getFruits() {
         return fruits;
+    }
+    
+    public void addBalance(Banknote bankNote) {
+        this.balance += bankNote.getAmount();
     }
 }
